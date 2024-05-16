@@ -147,7 +147,7 @@ class RaftWarper(nn.Module):
     def __init__(self, args) -> None:
         super().__init__()
         self.raft = RAFT(args)
-        state_dict = torch.load(args["ckpt"])
+        state_dict = torch.load(args["ckpt"], map_location=torch.device('cpu')) # add cpu
         real_state_dict = {k.split("module.")[-1]: v for k, v in state_dict.items()}
         self.raft.load_state_dict(real_state_dict)
         if args["freeze"]:

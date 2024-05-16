@@ -227,7 +227,8 @@ class ModelInference:
                 color_dict = load_json(ref_json_path)
                 json_save_path = osp.join(save_folder, name_str + ".json")
 
-                match_tensor = self.model(self.dis_data_to_cuda(test_data))
+                match_tensor = self.model(test_data) # for local PC cpu test
+                # match_tensor = self.model(self.dis_data_to_cuda(test_data))
                 match_scores = match_tensor["match_scores"].cpu().numpy()
 
                 color_next_frame = {}
@@ -269,7 +270,8 @@ class ModelInference:
                 color_dict = load_json(json_path_ref)
                 json_save_path = osp.join(save_folder, name_str + ".json")
 
-                match_tensor = self.model(self.dis_data_to_cuda(test_data))
+                match_tensor = self.model(test_data) # for local cpu test
+                # match_tensor = self.model(self.dis_data_to_cuda(test_data))
                 match_scores = match_tensor["match_scores"].cpu().numpy()
 
                 color_next_frame = {}

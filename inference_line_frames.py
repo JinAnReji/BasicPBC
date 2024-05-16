@@ -149,7 +149,7 @@ def generate_seg(path, seg_type="default", radius=4, save_color_seg=False, multi
 
 
 def load_params(model_path):
-    full_model = torch.load(model_path)
+    full_model = torch.load(model_path, map_location=torch.device('cpu')) # add cpu
     if "params_ema" in full_model:
         return full_model["params_ema"]
     elif "params" in full_model:
@@ -208,7 +208,7 @@ if __name__ == "__main__":
             clip_resolution=(320, 320),
         )
 
-    model = model.cuda()
+    # model = model.cuda() # command this temparary to test on Notebook PC
     model.load_state_dict(load_params(ckpt_path))
     model.eval()
 

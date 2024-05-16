@@ -101,8 +101,10 @@ class AnimeInferenceDataset(data.Dataset):
         seg_ref = read_seg_2_np(self.data_list[index]["seg_ref"])
 
         gt_ref = self.data_list[index]["gt_ref"]
-        gt_ref = read_img_2_np(gt_ref) if gt_ref is not None else None
-
+        try:
+            gt_ref = read_img_2_np(gt_ref) if gt_ref is not None else None
+        except FileNotFoundError:
+            gt_ref = None
         line, seg, _ = self._square_img_data(line, seg)
         line_ref, seg_ref, gt_ref = self._square_img_data(line_ref, seg_ref, gt_ref)
 

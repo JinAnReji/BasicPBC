@@ -1,0 +1,3 @@
+opencv-python
+tb-nightly
+open_clip_torch
